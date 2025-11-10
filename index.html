@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企業向け研修サービス｜人材を"事業の核"に育てる伴走型人材育成</title>
+    <link rel="stylesheet" href="/css/modal.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ファーストビュー */
+        .hero {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e8ba3 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .hero .authority {
+            background: rgba(255, 255, 255, 0.15);
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 30px;
+            margin-bottom: 40px;
+            font-size: 1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn-primary {
+            background: #ff6b35;
+            color: white;
+            padding: 20px 40px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #ff8555;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #1e3c72;
+            padding: 18px 35px;
+            font-size: 1rem;
+            border: 2px solid white;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .btn-secondary:hover {
+            background: transparent;
+            color: white;
+        }
+
+        /* 問題提起セクション */
+        .problems {
+            padding: 80px 20px;
+            background: #f8f9fa;
+        }
+
+        .problems h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: #1e3c72;
+            margin-bottom: 50px;
+        }
+
+        .problem-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .problem-item {
+            background: white;
+            padding: 25px 30px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #ff6b35;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .problem-item::before {
+            content: "☐ ";
+            color: #ff6b35;
+            font-size: 1.3rem;
+            margin-right: 10px;
+        }
+
+        /* 解決策セクション */
+        .solution {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .solution h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .solution p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.9;
+        }
+
+        /* 選ばれる理由セクション */
+        .reasons {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .reasons h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #1e3c72;
+            margin-bottom: 60px;
+        }
+
+        .reason-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .reason-card {
+            background: #f8f9fa;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .reason-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(30, 60, 114, 0.15);
+        }
+
+        .reason-number {
+            background: #ff6b35;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        .reason-card h3 {
+            color: #1e3c72;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .reason-card p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* フォロー体制の図解 */
+        .follow-flow {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .flow-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .flow-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            position: relative;
+        }
+
+        .flow-step-number {
+            background: #2a5298;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: bold;
+        }
+
+        .flow-step h4 {
+            color: #1e3c72;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .flow-step p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .flow-arrow {
+            font-size: 2rem;
+            color: #2a5298;
+            flex: 0;
+        }
+
+        /* サービス・料金プラン */
+        .pricing {
+            padding: 80px 20px;
+            background: #f8f9fa;
+        }
+
+        .pricing h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #1e3c72;
+            margin-bottom: 60px;
+        }
+
+        .pricing-main {
+            background: white;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 3px solid #ff6b35;
+        }
+
+        .pricing-main h3 {
+            color: #1e3c72;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            text-align: center;
+            font-size: 3rem;
+            color: #ff6b35;
+            font-weight: bold;
+            margin: 30px 0;
+        }
+
+        .price span {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .pricing-content {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .pricing-content h4 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+
+        .pricing-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .pricing-content li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .pricing-content li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-content li::before {
+            content: "✓ ";
+            color: #ff6b35;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .other-services {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .other-services h3 {
+            color: #1e3c72;
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .service-item {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .service-item h4 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .service-item p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* 実績セクション */
+        .achievements {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .achievements h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #1e3c72;
+            margin-bottom: 60px;
+        }
+
+        .achievement-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .achievement-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 40px;
+            border-radius: 15px;
+            border-left: 5px solid #2a5298;
+        }
+
+        .achievement-card h3 {
+            color: #1e3c72;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        .achievement-card p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* 最終CTA */
+        .final-cta {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+        }
+
+        .cta-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .cta-option {
+            background: white;
+            color: #333;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .cta-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-option.recommended {
+            border: 3px solid #ff6b35;
+            position: relative;
+        }
+
+        .recommended-badge {
+            background: #ff6b35;
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .cta-option h3 {
+            color: #1e3c72;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-option p {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .cta-option .btn-primary {
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .cta-option .btn-secondary {
+            background: #2a5298;
+            color: white;
+            border-color: #2a5298;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .cta-option .btn-secondary:hover {
+            background: #1e3c72;
+            border-color: #1e3c72;
+        }
+
+        /* フッター */
+        footer {
+            background: #1e3c72;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1rem;
+            }
+
+            .btn-primary {
+                padding: 18px 30px;
+                font-size: 1rem;
+            }
+
+            .btn-secondary {
+                padding: 16px 28px;
+                font-size: 0.95rem;
+            }
+
+            .problems h2,
+            .reasons h2,
+            .pricing h2,
+            .achievements h2,
+            .final-cta h2 {
+                font-size: 1.6rem;
+            }
+
+            .flow-steps {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+                margin: 10px 0;
+            }
+
+            .pricing-main {
+                padding: 30px 20px;
+            }
+
+            .price {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ファーストビュー -->
+    <section class="hero">
+        <div class="container">
+            <h1>『人が育たない』は、もう終わりにしませんか？</h1>
+            <p class="subtitle">
+                大手企業を知り尽くしたプロが、貴社の人材を"事業の核"に育てます。<br>
+                （社員50〜100名の中小企業様向け 伴走型人材育成・研修サービス）
+            </p>
+            <div class="authority">
+                講師経験10年以上 ｜ 大手IT企業での実績多数
+            </div>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn-primary">まずは30分無料相談に申し込む</a>
+                <a href="#download" class="btn-secondary">サービス資料（無料）をダウンロード</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 問題提起 -->
+    <section class="problems">
+        <div class="container">
+            <h2>経営者様・人事ご担当者様、こんなお悩みはありませんか？</h2>
+            <div class="problem-list">
+                <div class="problem-item">
+                    大手のような質の高い研修を受けさせたいが、コストが見合わない。
+                </div>
+                <div class="problem-item">
+                    研修をやっても、結局現場で活かせず、やりっぱなしになっている。
+                </div>
+                <div class="problem-item">
+                    新人研修にまで手が回らない、何から始めればいいか分からない。
+                </div>
+                <div class="problem-item">
+                    人材育成や組織について、気軽に相談できる社外の専門家がいない。
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 解決策の提示 -->
+    <section class="solution">
+        <div class="container">
+            <h2>
+                そのお悩み、経験豊富なプロフェッショナルチームが<br>
+                「高品質な研修」と「伴走型サポート」で、まるごと解決します！
+            </h2>
+            <p>
+                私たちは研修を提供するだけでなく、人事戦略のパートナーとして経営者の良き相談相手となります。
+            </p>
+        </div>
+    </section>
+
+    <!-- 選ばれる4つの理由 -->
+    <section class="reasons">
+        <div class="container">
+            <h2>選ばれる4つの理由</h2>
+            <div class="reason-cards">
+                <div class="reason-card">
+                    <div class="reason-number">1</div>
+                    <h3>各分野のプロフェッショナルが集結した講師陣</h3>
+                    <p>
+                        コンサルタント、プログラマー、研修講師、キャリアコンサルタント。<br>
+                        経歴20年、大手IT部門管理者30年など、各分野のエキスパートがチームを組んであなたの企業をサポートします。
+                    </p>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-number">2</div>
+                    <h3>中小企業に特化した、実践的なプログラム</h3>
+                    <p>
+                        特有の人間関係やマルチタスクに対応した研修内容。<br>
+                        経営者視点を盛り込み、即座に現場で活かせる実践的なスキルを習得いただけます。
+                    </p>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-number">3</div>
+                    <h3>「やりっぱなし」にしない、徹底したフォローアップ体制</h3>
+                    <p>
+                        研修後の定着度チェック、個別面談、管理者へのフィードバックまで、一貫してサポート。確実にスキルを定着させます。
+                    </p>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-number">4</div>
+                    <h3>経営者の"右腕"となる、伴走型人事サポート</h3>
+                    <p>
+                        研修のプランニングはもちろん、採用、組織開発、制度設計など、人事に関するあらゆるお悩みをご相談いただけます。私たちは「研修業者」ではなく、貴社の成長を共に目指す「外部の人事パートナー」です。
+                    </p>
+                </div>
+            </div>
+
+            <!-- フォローアップの流れ図解 -->
+            <div class="follow-flow">
+                <h3 style="text-align: center; color: #1e3c72; margin-bottom: 40px; font-size: 1.5rem;">研修後のフォローの流れ</h3>
+                <div class="flow-steps">
+                    <div class="flow-step">
+                        <div class="flow-step-number">STEP1</div>
+                        <h4>研修実施</h4>
+                        <p>プロ講師による質の高い研修を実施</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">STEP2</div>
+                        <h4>現場での実践期間</h4>
+                        <p>学んだスキルを実務で活用</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">STEP3</div>
+                        <h4>3ヶ月後<br>定着度チェック</h4>
+                        <p>オンラインで理解度・実践度を確認</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-step-number">STEP4</div>
+                        <h4>個別面談＆<br>フィードバック</h4>
+                        <p>受講者面談と管理者への報告・提言</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- サービス・料金プラン -->
+    <section class="pricing">
+        <div class="container">
+            <h2>サービス・料金プラン</h2>
+
+            <div class="pricing-main">
+                <h3>新人研修 基本プラン</h3>
+                <div class="price">
+                    35,000<span>円 / 1名様</span>
+                </div>
+                <div class="pricing-content">
+                    <h4>研修内容</h4>
+                    <ul>
+                        <li>ビジネスマナー</li>
+                        <li>ロジカルシンキング</li>
+                        <li>IT基礎</li>
+                        <li>AI活用入門</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="other-services">
+                <h3>その他の研修メニュー</h3>
+                <div class="service-grid">
+                    <div class="service-item">
+                        <h4>中堅社員向け研修</h4>
+                        <p>フォロワーシップ、問題解決力向上、リーダーシップ基礎など</p>
+                        <p style="margin-top: 15px; color: #ff6b35; font-weight: bold;">詳細はお問い合わせください</p>
+                    </div>
+                    <div class="service-item">
+                        <h4>管理者向け研修</h4>
+                        <p>リーダーシップ、マネジメント、組織開発など</p>
+                        <p style="margin-top: 15px; color: #ff6b35; font-weight: bold;">詳細はお問い合わせください</p>
+                    </div>
+                    <div class="service-item">
+                        <h4>IT専門研修</h4>
+                        <p>プログラミング、DX推進、データ分析など</p>
+                        <p style="margin-top: 15px; color: #ff6b35; font-weight: bold;">詳細はお問い合わせください</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 実績・信頼の証明 -->
+    <section class="achievements">
+        <div class="container">
+            <h2>実績・信頼の証明</h2>
+            <div class="achievement-cards">
+                <div class="achievement-card">
+                    <h3>200名規模の企業様で新人研修を担当</h3>
+                    <p>
+                        成長中の中堅企業様において、毎年20名以上の新人研修を継続的に実施。受講者満足度95%以上を維持し、現場での即戦力化を実現しています。
+                    </p>
+                </div>
+                <div class="achievement-card">
+                    <h3>従業員1万名の大手IT企業での実績</h3>
+                    <p>
+                        大手IT企業での新人研修プランニング経験を持つ講師陣が、大企業レベルの質の高い研修を中小企業様にも提供します。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 最終CTA -->
+    <section class="final-cta" id="contact">
+        <div class="container">
+            <h2>まずは、御社の課題をお聞かせください</h2>
+            <div class="cta-options">
+                <div class="cta-option recommended">
+                    <span class="recommended-badge">一番おすすめ</span>
+                    <h3>30分無料オンライン相談</h3>
+                    <p>
+                        御社の課題をお聞きし、最適な研修プランをご提案します。オンラインで気軽にご相談いただけます。
+                    </p>
+                    <a href="mailto:contact@example.com?subject=30分無料相談の申し込み" class="btn-primary">無料相談に申し込む</a>
+                </div>
+                <div class="cta-option" id="download">
+                    <h3>サービス資料ダウンロード</h3>
+                    <p>
+                        研修内容の詳細、講師プロフィール、料金体系などをまとめた資料を無料でダウンロードいただけます。
+                    </p>
+                    <a href="mailto:contact@example.com?subject=資料ダウンロード希望" class="btn-secondary">資料をダウンロード</a>
+                </div>
+                <div class="cta-option">
+                    <h3>お問い合わせ</h3>
+                    <p>
+                        その他のご質問、ご相談など、お気軽にお問い合わせください。24時間以内にご返信いたします。
+                    </p>
+                    <a href="mailto:contact@example.com?subject=お問い合わせ" class="btn-secondary">お問い合わせする</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 企業向け研修サービス All Rights Reserved.</p>
+            <p>お問い合わせ: contact@example.com</p>
+        </div>
+    </footer>
+
+    <!-- 無料相談モーダル -->
+    <div id="consultation-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>30分無料オンライン相談</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="consultation-form">
+                    <div class="form-group">
+                        <label>お名前<span class="required">*</span></label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>会社名</label>
+                        <input type="text" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label>メールアドレス<span class="required">*</span></label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>電話番号</label>
+                        <input type="tel" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label>ご相談内容</label>
+                        <textarea name="message" placeholder="ご相談内容やご要望をご記入ください"></textarea>
+                    </div>
+                    <div class="form-submit">
+                        <button type="submit">送信する</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 資料ダウンロードモーダル -->
+    <div id="download-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>サービス資料ダウンロード</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="download-form">
+                    <div class="form-group">
+                        <label>お名前<span class="required">*</span></label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>会社名</label>
+                        <input type="text" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label>メールアドレス<span class="required">*</span></label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-submit">
+                        <button type="submit">資料をダウンロード</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- お問い合わせモーダル -->
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>お問い合わせ</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label>お名前<span class="required">*</span></label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>会社名</label>
+                        <input type="text" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label>メールアドレス<span class="required">*</span></label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>電話番号</label>
+                        <input type="tel" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label>件名</label>
+                        <input type="text" name="subject">
+                    </div>
+                    <div class="form-group">
+                        <label>お問い合わせ内容<span class="required">*</span></label>
+                        <textarea name="message" required placeholder="お問い合わせ内容をご記入ください"></textarea>
+                    </div>
+                    <div class="form-submit">
+                        <button type="submit">送信する</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/contact.js"></script>
+</body>
+</html>

@@ -2,6 +2,14 @@
 
 社員50〜100名の中小企業様向け 伴走型人材育成・研修サービスのランディングページです。
 
+## 🌐 デモサイト
+
+**本番環境**: https://training-service-lp.vercel.app/
+
+**GitHubリポジトリ**: https://github.com/MICHANWANWAN/training-service-lp
+
+> **注**: 現在Vercel無料プランでホスティング中（テスト環境）。商用利用する場合はRenderやRailwayへの移行を推奨します。
+
 ## 機能
 
 - レスポンシブデザイン対応
@@ -76,6 +84,10 @@ training-service-lp/
 ├── .env.example            # 環境変数サンプル
 ├── .env                    # 環境変数（gitignore対象）
 ├── .gitignore             # Git除外設定
+├── Dockerfile             # Docker設定
+├── docker-compose.yml     # Docker Compose設定
+├── vercel.json            # Vercel設定
+├── render.yaml            # Render設定
 ├── public/                 # 静的ファイル
 │   ├── css/
 │   │   └── modal.css      # モーダルスタイル
@@ -85,6 +97,53 @@ training-service-lp/
 ```
 
 ## デプロイ
+
+### ✅ 現在のデプロイ状況
+
+**Vercel**: https://training-service-lp.vercel.app/ （デプロイ済み）
+
+GitHubリポジトリにプッシュすると、Vercelが自動的にデプロイします。
+
+---
+
+### Vercelへのデプロイ（推奨）
+
+#### 方法1: Vercel Dashboard（最も簡単）
+
+1. [Vercel](https://vercel.com)にアクセス
+2. GitHubアカウントでログイン
+3. 「New Project」をクリック
+4. GitHubリポジトリ `MICHANWANWAN/training-service-lp` を選択
+5. 「Deploy」をクリック
+
+**環境変数の設定**:
+- Settings → Environment Variables で以下を追加
+  - `EMAIL_USER`: your-email@gmail.com
+  - `EMAIL_PASS`: Gmailアプリパスワード
+  - `ADMIN_EMAIL`: admin@example.com
+
+#### 方法2: Vercel CLI
+
+```bash
+npm i -g vercel
+vercel login
+vercel
+```
+
+---
+
+### Renderへのデプロイ（商用利用OK）
+
+1. [Render](https://render.com)にアクセス
+2. 「New Web Service」をクリック
+3. GitHubリポジトリを接続
+4. `render.yaml`を自動検出
+5. 環境変数を設定して「Create Web Service」
+
+**無料プラン**: 15分非アクティブでスリープ
+**有料プラン**: $7/月でスリープなし
+
+---
 
 ### Herokuへのデプロイ
 
@@ -109,19 +168,16 @@ heroku config:set ADMIN_EMAIL=admin@example.com
 git push heroku main
 ```
 
-### Vercelへのデプロイ
+---
 
-1. Vercel CLIをインストール
+### Railwayへのデプロイ（商用利用OK）
 
-```bash
-npm i -g vercel
-```
+1. [Railway](https://railway.app)にアクセス
+2. 「New Project」→「Deploy from GitHub repo」
+3. リポジトリを選択して環境変数を設定
+4. 自動デプロイ開始
 
-2. デプロイ
-
-```bash
-vercel
-```
+**無料枠**: $5/月のクレジット（スリープなし）
 
 ### VPSへのデプロイ
 
@@ -165,15 +221,32 @@ pm2 save
 
 ### Gmailを使用する場合
 
-1. Googleアカウントで2段階認証を有効化
-2. アプリパスワードを生成
-3. `.env`ファイルに設定
+#### ステップ1: 2段階認証を有効化
+1. [Googleアカウント セキュリティ](https://myaccount.google.com/security)にアクセス
+2. 「2段階認証プロセス」を有効化
 
+#### ステップ2: アプリパスワードを生成
+1. [アプリパスワード](https://myaccount.google.com/apppasswords)にアクセス
+2. 「アプリを選択」→「その他（カスタム名）」
+3. 「training-service-lp」などの名前を入力
+4. 「生成」をクリック
+5. 16桁のパスワードをコピー
+
+#### ステップ3: 環境変数に設定
+
+**ローカル環境**（`.env`ファイル）:
 ```env
 EMAIL_SERVICE=gmail
 EMAIL_USER=your-email@gmail.com
-EMAIL_PASS=your-16-digit-app-password
+EMAIL_PASS=xxxx xxxx xxxx xxxx  # 16桁のアプリパスワード
+ADMIN_EMAIL=admin@example.com
 ```
+
+**Vercel**（Dashboard）:
+- Settings → Environment Variables で上記を設定
+
+**Render/Railway**（Dashboard）:
+- Environment で上記を設定
 
 ### その他のメールサービス
 
@@ -201,10 +274,49 @@ Nodemailerは様々なメールサービスに対応しています：
 2. `public/js/contact.js`のフォームデータ取得部分を編集
 3. `server.js`のAPIエンドポイントを編集
 
-## ライセンス
+## 📋 使用上の注意
+
+### デプロイサービスの選択
+
+| サービス | 無料プラン | 商用利用 | スリープ | おすすめ用途 |
+|---------|-----------|---------|---------|------------|
+| **Vercel** | ✅ | ❌ | なし | テスト・個人プロジェクト |
+| **Render** | ✅ | ✅ | あり（15分） | 商用利用（低トラフィック） |
+| **Railway** | $5/月クレジット | ✅ | なし | 商用利用（中トラフィック） |
+| **Heroku** | ❌（廃止） | - | - | - |
+
+### 推奨事項
+
+- **テスト段階**: Vercel無料プラン（現在の状態）
+- **商用利用**: RenderまたはRailwayに移行
+- **本格運用**: Vercel Pro ($20/月) または Render Starter ($7/月)
+
+## 📝 TODO
+
+- [ ] メール送信機能のテスト
+- [ ] Vercelの環境変数設定（メール機能有効化）
+- [ ] カスタムドメインの設定（必要に応じて）
+- [ ] Google Analyticsの追加（必要に応じて）
+- [ ] SEO対策（meta tags追加）
+
+## 🤝 貢献
+
+プルリクエストは大歓迎です！大きな変更の場合は、まずIssueで議論してください。
+
+## 📄 ライセンス
 
 MIT License
 
-## サポート
+## 💬 サポート
 
-質問や問題がある場合は、Issuesを作成してください。
+質問や問題がある場合は、[Issues](https://github.com/MICHANWANWAN/training-service-lp/issues)を作成してください。
+
+## 🔗 リンク
+
+- **デモサイト**: https://training-service-lp.vercel.app/
+- **GitHubリポジトリ**: https://github.com/MICHANWANWAN/training-service-lp
+- **Vercelダッシュボード**: https://vercel.com/dashboard
+
+---
+
+**Created with**: Claude Code 🤖
